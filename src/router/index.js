@@ -20,13 +20,22 @@ const router = new Router({
         component: function(resolve) {
             require(['@/views/tools/tools.vue'], resolve)
         },
-        children: [{
-            path: '/tools/calculator',
-            name: 'calculator',
-            component: function(resolve) {
-                require(['@/views/tools/calculator.vue'], resolve)
-            }
-        }]
+        children: [
+            {
+                path: '/tools/calculator',
+                name: 'calculator',
+                component: function(resolve) {
+                    require(['@/views/tools/calculator.vue'], resolve)
+                }
+            },
+            {
+                path: '/tools/ECharts',
+                name: 'calculator',
+                component: function(resolve) {
+                    require(['@/views/tools/ECharts.vue'], resolve)
+                }
+            },
+        ]
     }]
 })
 
@@ -60,6 +69,6 @@ router.beforeEach((to, from, next) => {
     var s = document.getElementsByTagName("meta")[0];
     s.parentNode.insertBefore(hm, s);
 
-  });
+});
 
 export default router;

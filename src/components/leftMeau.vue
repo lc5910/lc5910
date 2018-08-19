@@ -6,8 +6,8 @@
           <el-menu-item index="/tools/calculator">算一算</el-menu-item>
       </el-submenu>
       <el-submenu index="2">
-          <template slot="title">gage</template>
-          <el-menu-item index="/travel">gage</el-menu-item>
+          <template slot="title">图表</template>
+          <el-menu-item index="/tools/ECharts">ECharts</el-menu-item>
       </el-submenu>
 
     </el-menu>

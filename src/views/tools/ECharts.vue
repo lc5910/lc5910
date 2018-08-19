@@ -5,7 +5,7 @@
                 
             </el-tab-pane>
             <el-tab-pane :label="tabLabel[1].label" :name="tabLabel[1].name">
-                <fundsCalculator></fundsCalculator>
+                
             </el-tab-pane>
             <el-tab-pane :label="tabLabel[2].label" :name="tabLabel[2].name">
                 
@@ -18,14 +18,14 @@
 </template>
 
 <script>
-    import fundsCalculator from '@/components/tools/fundsCalculator.vue'
+    // import fundsCalculator from '@/components/tools/fundsCalculator.vue'
     export default {
         data() {
             return {
-                activeName:'second',
+                activeName:'first',
                 tabLabel:[
                     {label:'gage',name:'first'},
-                    {label:'基金计算',name:'second'},
+                    {label:'gage',name:'second'},
                     {label:'gage',name:'third'},
                     {label:'gage',name:'fourth'},
                 ],
@@ -39,13 +39,13 @@
         },
         methods: {
             // tab栏切换
-            tabHandleClick(){ },
+            tabHandleClick(){},
         },
         computed: {
     
         },
         components: {
-           fundsCalculator
+           
         }
     
     }
