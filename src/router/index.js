@@ -30,7 +30,7 @@ const router = new Router({
             },
             {
                 path: '/tools/ECharts',
-                name: 'calculator',
+                name: 'ECharts',
                 component: function(resolve) {
                     require(['@/views/tools/ECharts.vue'], resolve)
                 }
@@ -56,7 +56,7 @@ router.beforeEach((to, from, next) => {
 
     //百度统计
     var key;
-    if(location.hostname === 'lc5910.github.io'){
+    if(~location.hostname.indexOf('lc5910.github.io')){
         key='31e4415e5b8e192b52c3df234ce1624a';
     }else{
         return;

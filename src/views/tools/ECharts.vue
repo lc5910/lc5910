@@ -2,7 +2,7 @@
     <div>
         <el-tabs v-model="activeName" @tab-click="tabHandleClick">
             <el-tab-pane :label="tabLabel[0].label" :name="tabLabel[0].name">
-                
+                <chinaMap></chinaMap>
             </el-tab-pane>
             <el-tab-pane :label="tabLabel[1].label" :name="tabLabel[1].name">
                 
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-    // import fundsCalculator from '@/components/tools/fundsCalculator.vue'
+    import chinaMap from '@/components/tools/chinaMap.vue'
     export default {
         data() {
             return {
                 activeName:'first',
                 tabLabel:[
-                    {label:'gage',name:'first'},
+                    {label:'map',name:'first'},
                     {label:'gage',name:'second'},
                     {label:'gage',name:'third'},
                     {label:'gage',name:'fourth'},
@@ -45,7 +45,7 @@
     
         },
         components: {
-           
+           chinaMap
         }
     
     }
