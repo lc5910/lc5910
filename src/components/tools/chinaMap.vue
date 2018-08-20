@@ -128,7 +128,6 @@
         components: {
             
         }
-    
     }
 </script>
 
