@@ -7,25 +7,21 @@
             <el-tab-pane :label="tabLabel[1].label" :name="tabLabel[1].name">
                 
             </el-tab-pane>
-            <el-tab-pane :label="tabLabel[2].label" :name="tabLabel[2].name">
-                
-            </el-tab-pane>
-            <el-tab-pane :label="tabLabel[3].label" :name="tabLabel[3].name">
-                
-            </el-tab-pane>
+            <!-- <el-tab-pane :label="tabLabel[2].label" :name="tabLabel[2].name"></el-tab-pane> -->
+            <!-- <el-tab-pane :label="tabLabel[3].label" :name="tabLabel[3].name"></el-tab-pane> -->
         </el-tabs>
     </div>
 </template>
 
 <script>
-    import chinaMap from '@/components/tools/chinaMap.vue'
+    import chinaMap from '@/components/tools/chart-chinaMap.vue'
     export default {
         data() {
             return {
                 activeName:'first',
                 tabLabel:[
                     {label:'map',name:'first'},
-                    {label:'gage',name:'second'},
+                    {label:'pie',name:'second'},
                     {label:'gage',name:'third'},
                     {label:'gage',name:'fourth'},
                 ],

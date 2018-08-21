@@ -12,7 +12,7 @@
         data() {
             return {
                 data:[
-                        {name: '北京',  value:0 , num:200 },
+                        {name: '北京',  value:10 , num:200 },
                         {name: '天津',  value:10, num:200 },
                         {name: '上海',  value:20, num:200 },
                         {name: '重庆',  value:30, num:200 },
@@ -63,56 +63,59 @@
                         text: '客户地域分布',
                         x:'center'
                     },
-                    tooltip : {//鼠标悬浮提示框组件。
-                        trigger: 'item',//数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+                    tooltip : {
+                        trigger: 'item',
                         color: '#f0f',
                         formatter: function (params) {
                             var res=params.name+'</br>分布比例：'+params.value+'%</br>销售金额：'+ params.data.num;
                             return res;
                         },
                     },
-                    visualMap: {//颜色的设置  dataRange
+                    visualMap: {
                         x: 'left',
                         y: 'center',
                         splitList: [
-                            {start: 50,  color:'#0ff' },
-                            {start: 50, end: 49 },
+                            {start: 49,  color:'#0ff' },
+                            {start: 40, end: 49 },
                             {start: 30, end: 39},
                             {start: 20, end: 29 },
                             {start: 10, end: 19},
-                            {start: 0, end: 9, color:'#eee'},
+                            {start: 0, end: 9, color:'#ccc'},
                         ],
-                        // calculable : true,//颜色呈条状
-                        // text:['高','低'],// 文本，默认为数值文本
-                    },
-                    roamController: {//控制地图的上下左右放大缩小 图上没有显示
-                        show: true,
-                        x: 'right',
-                        mapTypeControl: {
-                            'china': true
-                        }
+                        // show: false,
+                        // calculable : true,   //颜色呈条状
+                        // text:['高','低'],    // 文本，默认为数值文本
                     },
                     series : [
                         {
                             name: '分布比例',
                             type: 'map',
                             mapType: 'china',
-                            roam: false,     //是否开启鼠标缩放和平移漫游
-                            itemStyle:{     //地图区域的多边形 图形样式
-                                normal:{    //是图形在默认状态下的样式
+                            roam: false,
+                            itemStyle:{
+                                normal:{
                                     label:{
-                                        show:true,//是否显示标签
+                                        show:true,
                                         textStyle: {
                                             color: "#000"
-                                        }
+                                        },
+                                        position: 'inside',
                                     }
                                 },
-                                emphasis:{  //是图形在高亮状态下的样式,比如在鼠标悬浮或者图例联动高亮时
+                                emphasis:{
                                     label:{show:true}
                                 }
                             },
-                            top:"1%",//组件距离容器的距离
+                            top:"1%",
                             data: this.data,
+                            markPoint:{
+                                
+                            },
+                            markLine:{
+                                itemStyle:{
+                                    normal:{lineStyle:{type:'solid',color:'#f00'},label:{show:true,position:'left'}}
+                                },
+                            }
                         }
                     ]
                 };
