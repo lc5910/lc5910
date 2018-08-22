@@ -1,6 +1,8 @@
 <template>
     <div>
-        <div id="chinaMap"></div>
+        <div class='chart' id="lineChart"></div>
+        <div class='chart' id="chinaMap"></div>
+        <div class='chart' id="pieChart"></div>
     </div>
 </template>
 
@@ -11,7 +13,7 @@
     export default {
         data() {
             return {
-                data:[
+                mapData:[
                         {name: '北京',  value:10 , num:200 },
                         {name: '天津',  value:10, num:200 },
                         {name: '上海',  value:20, num:200 },
@@ -53,10 +55,12 @@
             echarts.registerMap('china',chinaJSON);
         },
         mounted() {
-            this.init();
+            this.chinaMap();
+            this.lineChart();
+            this.pieChart();
         },
         methods: {
-            init(){
+            chinaMap(){
                 var myChart = echarts.init(document.getElementById('chinaMap'));
                 var option = {
                     title : {
@@ -107,10 +111,7 @@
                                 }
                             },
                             top:"1%",
-                            data: this.data,
-                            markPoint:{
-                                
-                            },
+                            data: this.mapData,
                             markLine:{
                                 itemStyle:{
                                     normal:{lineStyle:{type:'solid',color:'#f00'},label:{show:true,position:'left'}}
@@ -120,9 +121,65 @@
                     ]
                 };
                 myChart.setOption(option);
-                myChart.on('mouseover', function (params) {
-                    var dataIndex = params.dataIndex;
-                });
+            },
+            lineChart(){
+                var myChart = echarts.init(document.getElementById('lineChart'));
+                var option = {
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: ['0', '0-0.1', '0.1-0.2', '0.2-0.3', '0.3-0.4', '0.4-0.5', '0.5-0.6', '0.6-0.7', '0.7-0.8', '0.8-0.9', '0.9-1', '1']
+                    },
+                    yAxis: {
+                        type: 'value',
+                        splitLine: {show: false}
+                    },
+                    series: [{
+                        data: [0, 0.02, 0.04, 0.06, 0.11, 0.21, 0.22, 0.16, 0.1, 0.07, 0.03, 0],
+                        type: 'line',
+                        smooth: true,
+                        hoverAnimation:false,
+                        cursor:'default',
+                        symbol: 'none',
+                        markLine: {
+                            data: [[
+                                {coord:['0.2-0.3', 0]},
+                                {coord:['0.2-0.3', 0.22],value:'客户稳定指数:0.22'}
+                            ]]
+                        }
+                    }]
+                };
+                myChart.setOption(option);
+            },
+            pieChart(){
+                var myChart = echarts.init(document.getElementById('pieChart'));
+                var option = {
+                    title : {
+                        text: '客户行业分布',
+                        x:'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b}"
+                    },
+                    series : [
+                        {
+                            name: '行业分布',
+                            type: 'pie',
+                            radius : '60%',
+                            data:[
+                                {value:0, name:'未知行业 0%'},
+                                {value:0, name:'保险业 0%'},
+                                {value:72, name:'批发零售业 72%'},
+                                {value:19, name:'商业服务业 19%'},
+                                {value:9, name:'软件服务业 9%'},
+                            ],
+                            hoverAnimation: false,
+                        }
+                    ]
+                };
+                myChart.setOption(option);
+
             },
         },
         computed: {
@@ -135,10 +192,13 @@
 </script>
 
 <style lang="less" scoped>
-    #chinaMap{
-        width:  '2%'; 
-        min-width: 900px;
-        height: 1000px;
-        margin: auto;
+    .chart{
+        width: 900px;
+        height: 600px;
+        margin: 0 ;
+        &#lineChart{
+            
+        }
     }
+    
 </style>

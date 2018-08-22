@@ -21,7 +21,7 @@
                 activeName:'first',
                 tabLabel:[
                     {label:'map',name:'first'},
-                    {label:'pie',name:'second'},
+                    {label:'gage',name:'second'},
                     {label:'gage',name:'third'},
                     {label:'gage',name:'fourth'},
                 ],
