@@ -61,10 +61,10 @@
         },
         methods: {
             chinaMap(){
-                var myChart = echarts.init(document.getElementById('chinaMap'));
+                var myChart = echarts.init(document.querySelector('#chinaMap'));
                 var option = {
                     title : {
-                        text: '客户地域分布',
+                        // text: '客户地域分布',
                         x:'center'
                     },
                     tooltip : {
@@ -76,6 +76,7 @@
                         },
                     },
                     visualMap: {
+                        show:false,
                         x: 'left',
                         y: 'center',
                         splitList: [
@@ -99,7 +100,7 @@
                             itemStyle:{
                                 normal:{
                                     label:{
-                                        show:true,
+                                        // show:true,
                                         textStyle: {
                                             color: "#000"
                                         },
@@ -110,7 +111,7 @@
                                     label:{show:true}
                                 }
                             },
-                            top:"1%",
+                            top:"5%",
                             data: this.mapData,
                             markLine:{
                                 itemStyle:{
@@ -123,7 +124,7 @@
                 myChart.setOption(option);
             },
             lineChart(){
-                var myChart = echarts.init(document.getElementById('lineChart'));
+                var myChart = echarts.init(document.querySelector('#lineChart'));
                 var option = {
                     xAxis: {
                         type: 'category',
@@ -152,10 +153,10 @@
                 myChart.setOption(option);
             },
             pieChart(){
-                var myChart = echarts.init(document.getElementById('pieChart'));
+                var myChart = echarts.init(document.querySelector('#pieChart'));
                 var option = {
                     title : {
-                        text: '客户行业分布',
+                        // text: '客户行业分布',
                         x:'center'
                     },
                     tooltip : {
@@ -166,7 +167,7 @@
                         {
                             name: '行业分布',
                             type: 'pie',
-                            radius : '60%',
+                            radius: ['50%', '70%'],
                             data:[
                                 {value:0, name:'未知行业 0%'},
                                 {value:0, name:'保险业 0%'},
@@ -194,10 +195,16 @@
 <style lang="less" scoped>
     .chart{
         width: 900px;
-        height: 600px;
+        height: 300px;
         margin: 0 ;
         &#lineChart{
-            
+            width: 800px;
+        }
+        &#chinaMap{
+            width: 470px;
+        }
+        &#pieChart{
+            width: 470px;
         }
     }
     
