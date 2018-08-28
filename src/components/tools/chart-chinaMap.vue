@@ -100,7 +100,7 @@
                             itemStyle:{
                                 normal:{
                                     label:{
-                                        // show:true,
+                                        show:true,
                                         textStyle: {
                                             color: "#000"
                                         },
@@ -201,7 +201,8 @@
             width: 800px;
         }
         &#chinaMap{
-            width: 470px;
+            width: 1000px;
+            height: 600px;
         }
         &#pieChart{
             width: 470px;

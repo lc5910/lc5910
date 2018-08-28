@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.1.26
+ * gage_tools.js v0.1.27
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2018/8/15
+ * update 2017/7/22 - 2018/8/27
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -81,14 +81,14 @@
             }
             if (gage.getObjType(obj) === 'Object') {
                 if (obj.cacheHours && obj.expires) {
-                    obj = obj.expires > (new Date()).getTime() ? obj[name] : null;
+                    obj = obj.expires > (new Date()).getTime() ? obj[name] : {};
                 } else if (obj.expires) {
-                    obj = obj.expires > (new Date()).getTime() ? obj : null;
-                    obj !== null ? delete obj.expires : 0;
+                    obj = obj.expires > (new Date()).getTime() ? obj : {};
+                    delete obj.expires;
                 }
-                obj === null ? gage.removeStorage(name) : 0;
                 return obj;
             }
+            obj === null ? obj = {} : 0;
             return obj;
         },
         removeStorage: function(name, session) {
