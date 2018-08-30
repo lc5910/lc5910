@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import router from './router'
-import directive from '../src/directive/directive.js'
+import '../src/directive/directive.js'
 import App from '@/App'
 import axios from '@/assets/js/axios'
 import store from '@/store/store'
@@ -21,7 +21,6 @@ new Vue({
     el: '#app',
     router,
     store,
-    directive,
     template: '<App/>',
     components: { App }
 })
