@@ -32,6 +32,7 @@
                 <el-button class="btn-submit" type="primary" size='medium' @click="dataFormSubmit(2)" :class='activeCal==2?"active":""'>反算本金</el-button>
                 <el-button class="btn-submit" type="primary" size='medium' @click="dataFormSubmit(3)" :class='activeCal==3?"active":""'>反算涨跌</el-button>
                 <el-button class="btn-submit" type="primary" size='medium' @click="resetForm('dataForm')">重置数据</el-button>
+                <el-button class="btn-submit" type="primary" size='medium' @click="downLoadImg">保存图片</el-button>
             </el-form-item>
         </el-form>
         <ul class="tips">
@@ -41,6 +42,7 @@
 </template>
 
 <script>
+    import html2canvas from '@/assets/js/plugin/html2canvas.min';
     export default {
         data() {
             return {
@@ -51,8 +53,8 @@
                     costServerCharge: '',
                     upRate: '',
                     redeemServerCharge: '',
-                    redeem: '',
                     serverCharge: '',
+                    redeem: '',
                     earnings: '',
                 },
                 // 校验规则
@@ -77,9 +79,9 @@
                     ],
                 },
                 productType:[
-                    {label:'指数C',value:'0',costServerCharge:0, redeemServerCharge:0},
-                    {label:'指数A',value:'1',costServerCharge:0.1, redeemServerCharge:0.3},
-                    {label:'混合型',value:'2',costServerCharge:0.15, redeemServerCharge:0.5},
+                    {label:'纳指100',value:'0',costServerCharge:0.13, redeemServerCharge:0.5},
+                    {label:'混合型',value:'1',costServerCharge:0.15, redeemServerCharge:0.5},
+                    {label:'指数C',value:'2',costServerCharge:0, redeemServerCharge:0},
                 ],
                 activeCal:1,   // 当前计算的按钮
                 tips:['提示：', '1、计算可能会有±0.01元的误差。', '2、切换产品类型才会自动计算结果。'],
@@ -97,10 +99,10 @@
                 this.dataForm = {
                     cost: '10000',
                     productType: '0',
-                    costServerCharge: '0',
+                    costServerCharge: '0.13',
                     upRate: '5',
+                    redeemServerCharge: '0.5',
                     serverCharge: '',
-                    redeemServerCharge: '0',
                     redeem: '',
                     earnings: '',
                 }
@@ -243,6 +245,35 @@
                 }
                 // 累计收益
                 this.dataForm.earnings = gage.toFixed2(cost*(1-costServerCharge/100)*(1+upRate/100)*(1-redeemServerCharge/100)-cost);
+            },
+            downLoadImg(){
+                var elem = document.querySelector('.rightContent');
+                var width = elem.offsetWidth; 
+                var height = elem.offsetHeight; 
+                var canvas = document.createElement("canvas"); 
+                var scale = 2; 
+                canvas.width = width * scale;
+                canvas.height = height * scale;
+                canvas.getContext("2d").scale(scale, scale);
+                var opts = {
+                    scale: scale,
+                    canvas: canvas,
+                    logging: true, 
+                    width: width,
+                    height: height
+                };
+                html2canvas(elem, opts).then(function(canvas) {
+                    let newImageData = canvas.toDataURL('image/jpg');
+                    let blob = gage._base64Toblob(newImageData);
+                    let url = window.URL.createObjectURL(blob);
+                    let eleLink = document.createElement('a');
+                    eleLink.setAttribute('href',url);
+                    eleLink.setAttribute('download',new Date().getTime()+'.jpg');
+                    eleLink.style.display = 'none';
+                    document.body.appendChild(eleLink);
+                    eleLink.click();
+                    document.body.removeChild(eleLink);
+                });
             }
         },
     }

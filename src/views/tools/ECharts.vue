@@ -34,7 +34,6 @@
 
         },
         methods: {
-            // tab栏切换
             tabHandleClick(){},
         },
         computed: {

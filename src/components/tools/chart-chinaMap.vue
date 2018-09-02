@@ -145,7 +145,7 @@
                         markLine: {
                             data: [[
                                 {coord:['0.2-0.3', 0]},
-                                {coord:['0.2-0.3', 0.22],value:'客户稳定指数:0.22'}
+                                {coord:['0.2-0.3', 0.22],value:'稳定指数:0.22'}
                             ]]
                         }
                     }]
@@ -156,7 +156,7 @@
                 var myChart = echarts.init(document.querySelector('#pieChart'));
                 var option = {
                     title : {
-                        // text: '客户行业分布',
+                        // text: '行业分布',
                         x:'center'
                     },
                     tooltip : {
