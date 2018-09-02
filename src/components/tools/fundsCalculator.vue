@@ -94,7 +94,6 @@
             
         },
         methods: {
-            // 初始化
             init(){
                 this.dataForm = {
                     cost: '10000',
@@ -113,7 +112,7 @@
                 // this.updateLoading(false);
                 this.activeCal=num;
                 //去除空格
-                for(var val in this.dataForm ){
+                for(let val in this.dataForm ){
                     this.dataForm[val] = this.dataForm[val].toString().trim();
                 }
                 this.$refs['dataForm'].validate((valid) => {
@@ -246,19 +245,20 @@
                 // 累计收益
                 this.dataForm.earnings = gage.toFixed2(cost*(1-costServerCharge/100)*(1+upRate/100)*(1-redeemServerCharge/100)-cost);
             },
+            // 保存图片
             downLoadImg(){
-                var elem = document.querySelector('.rightContent');
-                var width = elem.offsetWidth; 
-                var height = elem.offsetHeight; 
-                var canvas = document.createElement("canvas"); 
-                var scale = 2; 
+                let elem = document.querySelector('.rightContent');
+                let width = elem.offsetWidth; 
+                let height = elem.offsetHeight; 
+                let canvas = document.createElement("canvas"); 
+                let scale = 2;
                 canvas.width = width * scale;
                 canvas.height = height * scale;
                 canvas.getContext("2d").scale(scale, scale);
-                var opts = {
+                let opts = {
                     scale: scale,
                     canvas: canvas,
-                    logging: true, 
+                    logging: true,
                     width: width,
                     height: height
                 };
