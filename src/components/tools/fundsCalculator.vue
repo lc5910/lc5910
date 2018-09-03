@@ -249,7 +249,7 @@
             downLoadImg(){
                 let elem = document.querySelector('.rightContent');
                 let width = elem.offsetWidth; 
-                let height = elem.offsetHeight; 
+                let height = elem.offsetHeight;
                 let canvas = document.createElement("canvas"); 
                 let scale = 2;
                 canvas.width = width * scale;
