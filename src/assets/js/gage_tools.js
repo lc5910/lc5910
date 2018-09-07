@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.1.28
+ * gage_tools.js v0.2.0
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2018/8/28
+ * update 2017/7/22 - 2018/9/7
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -431,6 +431,7 @@
     gage.base64 = {
         _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
         encode: function(e) {
+            if (!e) { return ''; }
             var t = "";
             var n, r, i, s, o, u, a;
             var f = 0;
@@ -449,6 +450,7 @@
             return t;
         },
         decode: function(e) {
+            if (!e) { return ''; }
             var t = "";
             var n, r, i;
             var s, o, u, a;
@@ -488,7 +490,9 @@
         _utf8_decode: function(e) {
             var t = "";
             var n = 0;
-            var r = c2 = c3 = 0;
+            var r = 0;
+            var c2 = 0;
+            var c3 = 0;
             while (n < e.length) {
                 r = e.charCodeAt(n);
                 if (r < 128) {
