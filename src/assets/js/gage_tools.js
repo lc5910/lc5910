@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.0
+ * gage_tools.js v0.2.1
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2018/9/7
+ * update 2017/7/22 - 2018/9/12
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -511,6 +511,20 @@
             }
             return t;
         }
+    }
+
+    /* 数字千分位表示法 */
+    gage.thousands = function(val) {
+        if (val) {
+            val = val.toString();
+            if (~val.indexOf('.')) {
+                val = val.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+            } else {
+                val = val.replace(/(?=(?!(\b))(\d{3})+$)/g, ",");
+            }
+            return val;
+        }
+        return val;
     }
 
     return gage;

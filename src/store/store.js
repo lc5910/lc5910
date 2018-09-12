@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import { default as Vuex, mapState, mapActions } from 'vuex'
-import { Loading } from 'element-ui'; 
-
 Vue.use(Vuex)
 
 const store = new Vuex.Store({})
@@ -13,9 +11,9 @@ store.registerModule('app', {
     mutations: {
         updateLoading(state, isLoading) {
             if (isLoading) {
-                Loading.service({background: 'rgba(0, 0, 0, 0.1)'});
+                console.log('loading...');
             } else {
-                Loading.service().close();
+                console.log('loaded');
             }
             state.isLoading = isLoading;
         },
