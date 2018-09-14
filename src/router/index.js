@@ -5,38 +5,45 @@ import {Message } from 'element-ui'
 
 const router = new Router({
     routes: [{
-        path: '/',
-        name: '主页',
-        redirect: { name: 'calculator' },
-    }, {
-        path: '/travel',
-        name: 'travel',
-        component: function(resolve) {
-            require(['@/views/travel.vue'], resolve)
-        }
-    }, {
-        path: '/tools',
-        name: 'tools',
-        component: function(resolve) {
-            require(['@/views/tools/tools.vue'], resolve)
+            path: '/',
+            name: '主页',
+            redirect: { name: 'calculator' },
+        }, {
+            path: '/travel',
+            name: 'travel',
+            component: function(resolve) {
+                require(['@/views/travel.vue'], resolve)
+            }
+        }, {
+            path: '/tools',
+            name: 'tools',
+            component: function(resolve) {
+                require(['@/views/tools/tools.vue'], resolve)
+            },
+            children: [
+                {
+                    path: '/tools/calculator',
+                    name: 'calculator',
+                    component: function(resolve) {
+                        require(['@/views/tools/calculator.vue'], resolve)
+                    }
+                },
+                {
+                    path: '/tools/ECharts',
+                    name: 'ECharts',
+                    component: function(resolve) {
+                        require(['@/views/tools/ECharts.vue'], resolve)
+                    }
+                },
+            ]
+        }, {
+            path: '/drawLottery',
+            name: 'drawLottery',
+            component: function(resolve) {
+                require(['@/views/drawLottery.vue'], resolve)
+            }
         },
-        children: [
-            {
-                path: '/tools/calculator',
-                name: 'calculator',
-                component: function(resolve) {
-                    require(['@/views/tools/calculator.vue'], resolve)
-                }
-            },
-            {
-                path: '/tools/ECharts',
-                name: 'ECharts',
-                component: function(resolve) {
-                    require(['@/views/tools/ECharts.vue'], resolve)
-                }
-            },
-        ]
-    }]
+    ]
 })
 
 router.beforeEach((to, from, next) => {
