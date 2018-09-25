@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.1
+ * gage_tools.js v0.2.2
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2018/9/12
+ * update 2017/7/22 - 2018/9/15
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -295,11 +295,22 @@
     }
 
     /* 传入时间戳,返回年月日 */
-    gage.getTime = function(timestamp, separator) {
+    gage.getDate = function(timestamp, separator) {
         var date = timestamp ? new Date(timestamp) : new Date();
         var mouth = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
         var day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
         return date.getFullYear() + (separator || '') + mouth + (separator || '') + day;
+    }
+
+    /* 传入时间戳,返回年月日时分秒 */
+    gage.getFormTime = function(timestamp) {
+        var date = timestamp ? new Date(timestamp) : new Date();
+        var mouth = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
+        var day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+        var hour = date.getHours() > 9 ? date.getHours() : '0' + date.getHours();
+        var minute = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes();
+        var second = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds();
+        return date.getFullYear() + '-' + mouth + '-' + day + ' ' + hour + ':' + minute + ':' + second;
     }
 
     /* 数组去除重复元素 */
