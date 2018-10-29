@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.2
+ * gage_tools.js v0.2.3
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2018/9/15
+ * update 2017/7/22 - 2018/10/29
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -134,9 +134,56 @@
         return obj;
     }
 
+    /* 校验表单 */
+    gage.checkForm = function(sel) {
+        var sel = document.querySelector(sel);
+        var children = sel.querySelectorAll('input');
+        for (var i = 0; i < children.length; i++) {
+            var val = children[i];
+            var type = val.getAttribute('type');
+            if (val.getAttribute('required') != 'false') {
+                if (type == 'text' || type == 'password') {
+                    if (val.value == '' || val.length == 0) {
+                        return [false, children[i]];
+                    }
+                }
+            }
+        }
+        return [true];
+    }
+
+    /* 获取表单 */
+    gage.getForm = function(sel, attribute) {
+        var sel = document.querySelector(sel);
+        var res = {};
+        var children = sel.querySelectorAll('input');
+        children.forEach(function(val) {
+            var type = val.getAttribute('type');
+            if (((type == 'radio' || type == 'checkbox') && val.checked) || type == 'text' || type == 'password') {
+                if (val.getAttribute(attribute || 'data-val')) {
+                    res[val.getAttribute('name')] = val.getAttribute('data-val');
+                } else {
+                    res[val.getAttribute('name')] = val.value;
+                }
+            }
+        });
+        return res;
+    }
+
     /* 获取设备类型 */
     gage.deviceType = function() {
-        return (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) ? 'IOS' : (/(Android)/i.test(navigator.userAgent)) ? 'Android' : 'PC';
+        var obj={};
+        if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+            obj.type = 'IOS';
+        } else if (/(Android)/i.test(navigator.userAgent)) {
+            obj.type = 'Android';
+        } else {
+            obj.type = 'PC';
+        }
+        if (/MicroMessenger/.test(navigator.userAgent)) {
+            obj.isWeixin = true;
+        }
+        return obj;
     }
 
     /* 获取浏览器类型和版本 */
@@ -411,7 +458,7 @@
         });
     }
 
-    /* 判断 className */
+    /* 判断有无 className */
     gage.hasClass = function(el, className) {
         var reg = RegExp('\\s?' + className + '\\s?');
         return reg.test(el.className);
