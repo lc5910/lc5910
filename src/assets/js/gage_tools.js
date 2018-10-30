@@ -172,7 +172,7 @@
 
     /* 获取设备类型 */
     gage.deviceType = function() {
-        var obj={};
+        var obj = {};
         if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
             obj.type = 'IOS';
         } else if (/(Android)/i.test(navigator.userAgent)) {
