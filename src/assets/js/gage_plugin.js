@@ -1,7 +1,7 @@
 /*
- * gage_plugin.js v0.0.12
+ * gage_plugin.js v0.0.13
  * (c) gage(591033791@qq.com)
- * update 2017/12/26 - 2018/7/5
+ * update 2017/12/26 - 2018/11/28
  * jQuery plugin Tool Library
  */
 (function(global, factory) {
@@ -10,6 +10,46 @@
     'use strict';
     var gage = window.gage || function() {};
     var document = window.document;
+
+    /* 随机生成16进制颜色 */
+    gage.getRandomColor = function() {
+        var str, color = "#";
+        for (var i = 0; i < 3; i++) {
+            str = (Math.floor(Math.random() * 256)).toString(16);
+            color += str.length < 2 ? "0" + str : str;
+        }
+        return color;
+    }
+
+    /* 防止选择文字 */
+    gage.preventSelection = function() {
+        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+    }
+
+    /* 获取滚动条相对于顶部的偏移 */
+    gage.getScrollTop = function() {
+        return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    }
+
+    /* 获取窗口可视宽度和高度 */
+    gage.getWindow = function(param) {
+        var obj = {};
+        obj.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        obj.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        return obj
+    }
+
+    /* 获取页面元素的位置，需在DOM更新后获取 */
+    gage.getEleLocation = function(selector) {
+        var selector = document.querySelector(selector);
+        var DOMRect = selector.getBoundingClientRect();
+        var obj = [];
+        obj[0] = DOMRect.left;
+        obj[1] = DOMRect.top;
+        obj[2] = DOMRect.left + DOMRect.width;
+        obj[3] = DOMRect.top + DOMRect.height;
+        return obj;
+    }
 
     /* 页面滚动到指定元素的位置 */
     gage.$scrollTo = function(selector, time) {

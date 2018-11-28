@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.3
+ * gage_tools.js v0.2.4
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2018/10/29
+ * update 2017/7/22 - 2018/11/28
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -388,57 +388,13 @@
 
     /* 保留2位小数(向下取值) */
     gage.toFixed2 = function(val) {
-        if (val === '' || isNaN(val)) {
-            return '';
-        }
+        if (val === '' || isNaN(val)) { return ''; }
         var value = (parseInt(val * 100) / 100).toString();
-        if (value.indexOf('.') < 0) {
-            return value;
-        }
+        if (value.indexOf('.') < 0) { return value; }
         while (value.length <= value.indexOf('.') + 2) {
             value += '0';
         }
         return value;
-    }
-
-    /* 随机生成16进制颜色 */
-    gage.getRandomColor = function() {
-        var str, color = "#";
-        for (var i = 0; i < 3; i++) {
-            str = (Math.floor(Math.random() * 256)).toString(16);
-            color += str.length < 2 ? "0" + str : str;
-        }
-        return color;
-    }
-
-    /* 防止选择文字 */
-    gage.preventSelection = function() {
-        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
-    }
-
-    /* 获取滚动条相对于顶部的偏移 */
-    gage.getScrollTop = function() {
-        return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-    }
-
-    /* 获取窗口可视宽度和高度 */
-    gage.getWindow = function(param) {
-        var obj = {};
-        obj.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        obj.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-        return obj
-    }
-
-    /* 获取页面元素的位置，需在DOM更新后获取 */
-    gage.getEleLocation = function(selector) {
-        var selector = document.querySelector(selector);
-        var DOMRect = selector.getBoundingClientRect();
-        var obj = [];
-        obj[0] = DOMRect.left;
-        obj[1] = DOMRect.top;
-        obj[2] = DOMRect.left + DOMRect.width;
-        obj[3] = DOMRect.top + DOMRect.height;
-        return obj;
     }
 
     /* Android端body宽高改变的回调 */
@@ -458,32 +414,15 @@
         });
     }
 
-    /* 判断有无 className */
-    gage.hasClass = function(el, className) {
-        var reg = RegExp('\\s?' + className + '\\s?');
-        return reg.test(el.className);
-    };
-
-    /* 添加 className */
-    gage.addClass = function(el, className) {
-        if (gage.hasClass(el, className)) {
-            return false;
-        }
-        var newClass = el.className.split(' ');
-        newClass.push(className);
-        el.className = newClass.join(' ');
-    };
-
-    /* 删除 className */
-    gage.removeClass = function(el, className) {
-        if (!gage.hasClass(el, className)) {
-            return false;
-        }
-        var arr = el.className.split(' ');
-        var index = arr.indexOf(className);
-        ~index ? arr.splice(index, 1) : 0;
-        el.className = arr.join(' ');
-    };
+    /* Android端用户输入时滚动的BUG */
+    gage.androidResize = function() {
+        if (!(/Android/.test(navigator.appVersion))) { return; }
+        window.addEventListener("resize", function() {
+            if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+                setTimeout(function() { document.activeElement.scrollIntoViewIfNeeded(); }, 0);
+            }
+        })
+    }
 
     /* base64加密解密 */
     gage.base64 = {
@@ -573,14 +512,12 @@
 
     /* 数字千分位表示法 */
     gage.thousands = function(val) {
-        if (val) {
-            val = val.toString();
-            if (~val.indexOf('.')) {
-                val = val.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-            } else {
-                val = val.replace(/(?=(?!(\b))(\d{3})+$)/g, ",");
-            }
-            return val;
+        if (!val) { return val; }
+        val = val.toString();
+        if (~val.indexOf('.')) {
+            val = val.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+        } else {
+            val = val.replace(/(?=(?!(\b))(\d{3})+$)/g, ",");
         }
         return val;
     }
