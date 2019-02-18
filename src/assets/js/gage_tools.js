@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.4
+ * gage_tools.js v0.2.5
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2018/11/28
+ * update 2017/7/22 - 2019/2/18
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -414,14 +414,19 @@
         });
     }
 
-    /* Android端用户输入时滚动的BUG */
+    /* Android端focus的BUG和IOS微信端blur的BUG */
     gage.androidResize = function() {
-        if (!(/Android/.test(navigator.appVersion))) { return; }
-        window.addEventListener("resize", function() {
-            if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        if (/Android/.test(navigator.appVersion)) {
+            window.addEventListener("resize", function() {
+                if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+                    setTimeout(function() { document.activeElement.scrollIntoViewIfNeeded(); }, 0);
+                }
+            })
+        }else{
+            $('body').on('blur','input',function(){
                 setTimeout(function() { document.activeElement.scrollIntoViewIfNeeded(); }, 0);
-            }
-        })
+            })
+        }
     }
 
     /* base64加密解密 */

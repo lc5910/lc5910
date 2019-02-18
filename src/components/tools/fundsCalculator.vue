@@ -79,8 +79,8 @@
                     ],
                 },
                 productType:[
-                    {label:'纳指100',value:'0',costServerCharge:0.13, redeemServerCharge:0.5},
-                    {label:'混合型',value:'1',costServerCharge:0.15, redeemServerCharge:0.5},
+                    {label:'灵活混合C',value:'0',costServerCharge:0, redeemServerCharge:0},
+                    {label:'灵活混合',value:'1',costServerCharge:0, redeemServerCharge:0.5},
                     {label:'指数C',value:'2',costServerCharge:0, redeemServerCharge:0},
                 ],
                 activeCal:1,   // 当前计算的按钮
@@ -97,10 +97,10 @@
             init(){
                 this.dataForm = {
                     cost: '10000',
-                    productType: '0',
-                    costServerCharge: '0.13',
-                    upRate: '5',
-                    redeemServerCharge: '0.5',
+                    productType: this.productType[0].value,
+                    costServerCharge: this.productType[0].costServerCharge,
+                    upRate: '2',
+                    redeemServerCharge: this.productType[0].redeemServerCharge,
                     serverCharge: '',
                     redeem: '',
                     earnings: '',
