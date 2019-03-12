@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.5
+ * gage_tools.js v0.2.6
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2019/2/18
+ * update 2017/7/22 - 2019/3/12
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -390,6 +390,10 @@
     gage.toFixed2 = function(val) {
         if (val === '' || isNaN(val)) { return ''; }
         var value = (parseInt(val * 100) / 100).toString();
+        if (~val.toString().indexOf('.99999999999')) {
+            value -= -0.01;
+            value += '';
+        }
         if (value.indexOf('.') < 0) { return value; }
         while (value.length <= value.indexOf('.') + 2) {
             value += '0';
@@ -422,8 +426,8 @@
                     setTimeout(function() { document.activeElement.scrollIntoViewIfNeeded(); }, 0);
                 }
             })
-        }else{
-            $('body').on('blur','input',function(){
+        } else {
+            $('body').on('blur', 'input', function() {
                 setTimeout(function() { document.activeElement.scrollIntoViewIfNeeded(); }, 0);
             })
         }

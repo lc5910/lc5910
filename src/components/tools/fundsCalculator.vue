@@ -99,7 +99,7 @@
                     cost: '10000',
                     productType: this.productType[0].value,
                     costServerCharge: this.productType[0].costServerCharge,
-                    upRate: '2',
+                    upRate: '1.5',
                     redeemServerCharge: this.productType[0].redeemServerCharge,
                     serverCharge: '',
                     redeem: '',
@@ -108,8 +108,6 @@
             },
             // 提交表单
             dataFormSubmit (num) {
-                // this.updateLoading(true);
-                // this.updateLoading(false);
                 this.activeCal=num;
                 //去除空格
                 for(let val in this.dataForm ){
@@ -183,7 +181,9 @@
                 let upRate=parseFloat(this.dataForm.upRate);
                 let redeemServerCharge=parseFloat(this.dataForm.redeemServerCharge);
                 // 赎回金额
-                this.dataForm.redeem   = gage.toFixed2(cost*(1-costServerCharge/100)*(1+upRate/100)*(1-redeemServerCharge/100));
+                this.dataForm.redeem = gage.toFixed2(cost*(1-costServerCharge/100)*(1+upRate/100)*(1-redeemServerCharge/100));
+                console.log((1-costServerCharge/100)*(1+upRate/100)*(1-redeemServerCharge/100));
+                console.log(cost*(1-costServerCharge/100)*(1+upRate/100)*(1-redeemServerCharge/100));
                 // 总手续费
                 let sum = gage.toFixed2(cost*costServerCharge/100+cost*(1-costServerCharge/100)*(1+upRate/100)*redeemServerCharge/100);
                 if(sum!==''){

@@ -25,8 +25,8 @@
         }
     },
     created(){
-        if(gage.deviceType()!=='PC'){
-            this.title='请用电脑浏览本站';
+        if(gage.deviceType().type!=='PC'){
+            this.title='电脑浏览本站更佳';
         }
     },
     mounted(){
