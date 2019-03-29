@@ -79,12 +79,12 @@
                     ],
                 },
                 productType:[
-                    {label:'灵活混合C',value:'0',costServerCharge:0, redeemServerCharge:0},
-                    {label:'灵活混合',value:'1',costServerCharge:0, redeemServerCharge:0.5},
-                    {label:'指数C',value:'2',costServerCharge:0, redeemServerCharge:0},
+                    {label:'指数C',value:'0',costServerCharge:0, redeemServerCharge:0},
+                    {label:'0.5赎回费率',value:'1',costServerCharge:0, redeemServerCharge:0.5},
+                    {label:'7天内赎回',value:'2',costServerCharge:0, redeemServerCharge:1.5},
                 ],
                 activeCal:1,   // 当前计算的按钮
-                tips:['提示：', '1、计算可能会有±0.01元的误差。', '2、切换产品类型才会自动计算结果。'],
+                tips:['提示：', '1、计算可能会有误差。', '2、切换产品类型才会自动计算结果。'],
             }
         },
         created() {
@@ -99,7 +99,7 @@
                     cost: '10000',
                     productType: this.productType[0].value,
                     costServerCharge: this.productType[0].costServerCharge,
-                    upRate: '1.5',
+                    upRate: '1',
                     redeemServerCharge: this.productType[0].redeemServerCharge,
                     serverCharge: '',
                     redeem: '',
