@@ -365,7 +365,7 @@
         var arr = time.split(' ');
         var arr1 = arr[0].split('-');
         var arr2 = arr[1].split(':');
-        return new Date(arr1[0], arr1[1], arr1[2], arr2[0], arr2[1], arr2[2]).getTime();
+        return new Date(arr1[0], arr1[1] - 1, arr1[2], arr2[0], arr2[1], arr2[2]).getTime();
     }
 
     /* 数组去除重复元素 */
