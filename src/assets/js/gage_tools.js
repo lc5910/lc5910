@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.7
+ * gage_tools.js v0.2.8
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2019/4/4
+ * update 2017/7/22 - 2019/4/30
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -366,6 +366,24 @@
         var arr1 = arr[0].split('-');
         var arr2 = arr[1].split(':');
         return new Date(arr1[0], arr1[1] - 1, arr1[2], arr2[0], arr2[1], arr2[2]).getTime();
+    }
+
+    /* 函数防抖 - 执行最后一次 */
+    var timeout = null;
+    gage.debounce = function(fn, wait) {
+        if (timeout !== null) clearTimeout(timeout);
+        timeout = setTimeout(fn, wait || 100);
+    }
+
+    /* 函数节流 - 执行第一次 */
+    var canRun = true;
+    gage.dethrottle = function(fn, wait) {
+        if (!canRun) return;
+        canRun = false;
+        setTimeout(function() {
+            fn();
+            canRun = true;
+        }, wait || 100);
     }
 
     /* 数组去除重复元素 */
