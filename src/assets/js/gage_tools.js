@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.8
+ * gage_tools.js v0.2.9
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2019/4/30
+ * update 2017/7/22 - 2019/9/3
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -336,7 +336,7 @@
 
     /* 传入年月日,生成时间戳 */
     gage.getTimestamp = function(dateStr, separator) {
-        dateStr = dateStr || gage.getTime();
+        dateStr = dateStr || gage.getDate();
         separator && (dateStr = dateStr.replace(eval('/' + separator + '/g'), ''));
         return new Date(dateStr.slice(0, 4), dateStr.slice(4, 6) - 1, dateStr.slice(6, 8)).getTime();
     }
@@ -349,6 +349,14 @@
         return date.getFullYear() + (separator || '') + mouth + (separator || '') + day;
     }
 
+    /* 传入年月日时分秒,返回时间戳 */
+    gage.getFormTimestamp = function(time) {
+        var arr = time.split(' ');
+        var arr1 = arr[0].split('-');
+        var arr2 = arr[1].split(':');
+        return new Date(arr1[0], arr1[1] - 1, arr1[2], arr2[0], arr2[1], arr2[2]).getTime();
+    }
+
     /* 传入时间戳,返回年月日时分秒 */
     gage.getFormTime = function(timestamp) {
         var date = timestamp ? new Date(timestamp) : new Date();
@@ -358,14 +366,6 @@
         var minute = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes();
         var second = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds();
         return date.getFullYear() + '-' + mouth + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-    }
-
-    /* 传入年月日时分秒,返回时间戳 */
-    gage.getFormTimestamp = function(time) {
-        var arr = time.split(' ');
-        var arr1 = arr[0].split('-');
-        var arr2 = arr[1].split(':');
-        return new Date(arr1[0], arr1[1] - 1, arr1[2], arr2[0], arr2[1], arr2[2]).getTime();
     }
 
     /* 函数防抖 - 执行最后一次 */
