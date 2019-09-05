@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.9
+ * gage_tools.js v0.2.10
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2019/9/3
+ * update 2017/7/22 - 2019/9/5
  * Native JavaScript Tool Library
  */
 (function(global, factory) {
@@ -343,6 +343,7 @@
 
     /* 传入时间戳,返回年月日 */
     gage.getDate = function(timestamp, separator) {
+        if (timestamp && !/^\d+$/.test(timestamp)) { return timestamp; }
         var date = timestamp ? new Date(timestamp) : new Date();
         var mouth = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
         var day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
@@ -359,6 +360,7 @@
 
     /* 传入时间戳,返回年月日时分秒 */
     gage.getFormTime = function(timestamp) {
+        if (timestamp && !/^\d+$/.test(timestamp)) { return timestamp; }
         var date = timestamp ? new Date(timestamp) : new Date();
         var mouth = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
         var day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
