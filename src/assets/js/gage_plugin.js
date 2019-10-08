@@ -1,8 +1,8 @@
 /*
  * gage_plugin.js v0.0.13
  * (c) gage(591033791@qq.com)
- * update 2017/12/26 - 2018/11/28
- * jQuery plugin Tool Library
+ * Update 2017/12/26 - 2018/11/28
+ * Tools Library Of jQuery Plugin
  */
 (function(global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : (global.gage = factory());

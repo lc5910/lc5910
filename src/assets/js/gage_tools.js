@@ -1,8 +1,8 @@
 /*
- * gage_tools.js v0.2.10
+ * gage_tools.js v0.2.11
  * (c) gage(591033791@qq.com)
- * update 2017/7/22 - 2019/9/5
- * Native JavaScript Tool Library
+ * Update 2017/7/22 - 2019/10/8
+ * Tools Library Of Native JavaScript
  */
 (function(global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : (global.gage = factory());
@@ -99,7 +99,7 @@
             domain = domain || '';
             typeof data === 'object' && data !== null ? data = JSON.stringify(data) : 0;
             odate.setDate(odate.getDate() + (iday ? iday : undefined));
-            document.cookie = name + "=" + encodeURIComponent(data) + ";expires=" + odate + ';domain=' + domain;
+            document.cookie = name + "=" + encodeURIComponent(data) + ";expires=" + odate + ';domain=' + domain + ';path=/';
         },
         /* get cookie */
         getCookie: function(name) {
