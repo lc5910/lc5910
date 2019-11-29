@@ -10,6 +10,10 @@
           <el-menu-item index="/tools/ECharts">ECharts</el-menu-item>
           <el-menu-item index="/drawLottery">抽个奖</el-menu-item>
       </el-submenu>
+       <el-submenu index="3">
+          <template slot="title">学习</template>
+          <el-menu-item index="/test/ES6">ES6</el-menu-item>
+      </el-submenu>
 
     </el-menu>
   </div>

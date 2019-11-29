@@ -9,10 +9,10 @@ const router = new Router({
             name: '主页',
             redirect: { name: 'calculator' },
         }, {
-            path: '/travel',
-            name: 'travel',
+            path: '/drawLottery',
+            name: 'drawLottery',
             component: function(resolve) {
-                require(['@/views/travel.vue'], resolve)
+                require(['@/views/drawLottery.vue'], resolve)
             }
         }, {
             path: '/tools',
@@ -27,22 +27,21 @@ const router = new Router({
                     component: function(resolve) {
                         require(['@/views/tools/calculator.vue'], resolve)
                     }
-                },
-                {
+                },{
                     path: '/tools/ECharts',
                     name: 'ECharts',
                     component: function(resolve) {
                         require(['@/views/tools/ECharts.vue'], resolve)
                     }
-                },
+                },{
+                    path: '/test/ES6',
+                    name: 'test',
+                    component: function(resolve) {
+                        require(['@/views/test/ES6.vue'], resolve)
+                    },
+                }
             ]
-        }, {
-            path: '/drawLottery',
-            name: 'drawLottery',
-            component: function(resolve) {
-                require(['@/views/drawLottery.vue'], resolve)
-            }
-        },
+        }
     ]
 })
 

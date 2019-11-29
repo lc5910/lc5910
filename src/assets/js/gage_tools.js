@@ -149,7 +149,7 @@
                 }
             }
         }
-        return [true];
+        return true;
     }
 
     /* 获取表单 */

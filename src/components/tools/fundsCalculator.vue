@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class='fundsCalculator'>
         <el-form :model="dataForm" :rules="dataRule" ref="dataForm">
             <el-form-item prop="cost" class='inputText' label='申购金额(元)'>
                 <el-input v-model="dataForm.cost"  type="text" maxlength="11"></el-input>
@@ -83,8 +83,8 @@
                     {label:'0.5赎回费率',value:'1',costServerCharge:0, redeemServerCharge:0.5},
                     {label:'7天内赎回',value:'2',costServerCharge:0, redeemServerCharge:1.5},
                 ],
-                activeCal:1,   // 当前计算的按钮
-                tips:['提示：', '1、计算可能会有误差。', '2、切换产品类型才会自动计算结果。'],
+                activeCal: 1,   // 当前计算的按钮
+                tips: ['提示：', '1、计算可能会有误差。', '2、切换产品类型才会自动计算结果。'],
             }
         },
         created() {
@@ -245,7 +245,7 @@
             },
             // 保存图片
             downLoadImg(){
-                let elem = document.querySelector('.rightContent');
+                let elem = document.querySelector('.fundsCalculator');
                 let width = elem.offsetWidth; 
                 let height = elem.offsetHeight;
                 let canvas = document.createElement("canvas"); 
@@ -278,27 +278,20 @@
 </script>
 
 <style lang="less" scoped>
-    .tips{
-        margin: 0.5rem 0;
-        li{
-            font-size: 0.3rem;
-            color:#666;
-            line-height: 2;
+    .fundsCalculator{
+        padding: 0.8rem 10px 10px;
+        .tips{
+            margin: 0.5rem 0;
+            li{
+                font-size: 0.3rem;
+                color:#666;
+                line-height: 2;
+            }
         }
-    }
-</style>
-<style lang="less">
-    .btn-submit{
-        &.active{
-            color: #f2f277;
-        }
-    }
-    .tips{
-        margin: 0.5rem 0;
-        li{
-            font-size: 0.3rem;
-            color:#666;
-            line-height: 2;
+        .btn-submit{
+            &.active{
+                color: #f2f277;
+            }
         }
     }
 </style>
