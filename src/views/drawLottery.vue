@@ -12,8 +12,8 @@
             <a href="javascript:;" class='acquire btn-success' @click="submit">确定领取</a>
         </div>
         <div class="content_3"  v-show='avtiveCode==3'>
-            <p>{{mobile}} 已领取奖品，完成免息分期后即有客服人员联系您</p>
-             <a href="/queryuote" class='btn-success'>免息分期Go</a>
+            <p>{{mobile}} 已领取奖品，完成注册即有客服人员联系您</p>
+             <a href="/queryuote" class='btn-success'>立即注册</a>
         </div>
     </div>
 </template>
@@ -67,12 +67,13 @@
                     }
                     this.click=true;
                     return;
-                }else if(this.click){
+                } */
+                if(this.click){
                     this.click=false;
                     this.getLottery();
                 }else{
                     return;
-                } */
+                }
                 this.run();
                 this.getLottery();  //test
             },
@@ -153,7 +154,7 @@
             //已经获奖对话框
             alreadyGet(){
                 this.avtiveCode=3;
-                 MessageBox({showCancelButton: true,message:'您的手机号已经抽过奖品，完成免息分期后即有客服人员联系您',confirmButtonText:'前往免息分期'}).then(action => { 
+                 MessageBox({showCancelButton: true,message:'您的手机号已经抽过奖品，完成注册后即有客服人员联系您',confirmButtonText:'立即注册'}).then(action => { 
                     action ==='confirm' ? this.$router.push('/') : 0;
                 });
             }

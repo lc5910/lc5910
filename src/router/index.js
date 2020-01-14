@@ -39,6 +39,12 @@ const router = new Router({
                     component: function(resolve) {
                         require(['@/views/test/ES6.vue'], resolve)
                     },
+                },{
+                    path: '/test/CSS3',
+                    name: 'test',
+                    component: function(resolve) {
+                        require(['@/views/test/CSS3.vue'], resolve)
+                    },
                 }
             ]
         }

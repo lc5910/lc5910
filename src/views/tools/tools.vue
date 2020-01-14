@@ -1,11 +1,11 @@
 <template>
     <div class='tools'>
-        <top></top>
+        <!-- <top></top> -->
         <el-row>
-            <el-col :sm="4" class='leftMeau'>
+            <el-col :sm="3" class='leftMeau'>
                 <leftMeau></leftMeau>
             </el-col>
-            <el-col :sm="20" class='rightContent'>
+            <el-col :sm="21" class='rightContent'>
                 <router-view></router-view>
             </el-col>
         </el-row>

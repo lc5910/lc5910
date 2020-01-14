@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.11
+ * gage_tools.js v0.2.12
  * (c) gage(591033791@qq.com)
- * Update 2017/7/22 - 2019/10/8
+ * Update 2017/7/22 - 2020/1/6
  * Tools Library Of Native JavaScript
  */
 (function(global, factory) {
@@ -431,6 +431,7 @@
 
     /* Android端body宽高改变的回调 */
     gage.windowResize = function(upCb, downCb) {
+        if (!/(Android)/i.test(navigator.userAgent)) { return };
         var client_h = document.documentElement.clientHeight;
         var client_w = document.documentElement.clientWidth;
         window.addEventListener("resize", function() {

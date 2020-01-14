@@ -13,6 +13,7 @@
        <el-submenu index="3">
           <template slot="title">学习</template>
           <el-menu-item index="/test/ES6">ES6</el-menu-item>
+          <el-menu-item index="/test/CSS3">CSS3</el-menu-item>
       </el-submenu>
 
     </el-menu>
@@ -59,7 +60,6 @@
       background-color: #3d414f;
       margin-bottom: -10000px;
       padding-bottom: 10000px;
-      overflow: hidden;
       ul.el-menu{
         background-color: #324157;
         border:none;
@@ -83,6 +83,9 @@
           &:hover{
             background-color: #00c4e2;
           }
+        }
+        .el-menu-item{
+          min-width: unset;
         }
       }
     }
