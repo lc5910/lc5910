@@ -9,6 +9,10 @@
                 <div class="dot"></div>
             </div>
         </div>
+
+        <div class="test_2">
+            <button class="btn btn-primary btn-ghost btn-shine">hover me</button>
+        </div>
     </div>
 </template>
 <script>
@@ -79,6 +83,74 @@
                 80%,
                 100% {
                     opacity: 0;
+                }
+            }
+        }
+        .test_2{
+            width: 455px;
+            .btn {
+                --hue: 190;
+                position: relative;
+                padding: 1rem 3rem;
+                font-size: 1rem;
+                line-height: 1.5;
+                color: white;
+                text-decoration: none;
+                text-transform: uppercase;
+                background-color: rgb(0, 185, 209);
+                border: 1px solid rgb(0, 185, 209);
+                outline: transparent;
+                overflow: hidden;
+                cursor: pointer;
+                user-select: none;
+                white-space: nowrap;
+                transition: 0.25s;
+                &:hover {
+                    background: rgb(0, 185, 209);
+                }
+
+                &-primary {
+                    --hue: 187;
+                }
+
+                &-ghost {
+                    color: rgb(0, 185, 209);
+                    background-color: transparent;
+                    border-color: rgb(0, 185, 209);
+
+                    &:hover {
+                        color: white;
+                    }
+                }
+
+                &-shine {
+                    color: white;
+
+                    &::before {
+                        position: absolute;
+                        content: "";
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(
+                            120deg,
+                            transparent,
+                            rgb(0, 185, 209),
+                            transparent
+                        );
+                        transform: translateX(-100%);
+                        transition: 0.6s;
+                    }
+
+                    &:hover {
+                        background: transparent;
+                        box-shadow: 0 0 20px 10px rgb(0, 185, 209);
+                    }
+
+                    &:hover::before {
+                        transform: translateX(100%);
+                    }
                 }
             }
         }
