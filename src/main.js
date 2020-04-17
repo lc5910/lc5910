@@ -7,8 +7,8 @@ import App from '@/App'
 import axios from '@/assets/js/axios'
 import store from '@/store/store'
 
-import ElementUI from 'element-ui'; 
-Vue.use(ElementUI); 
+import ElementUI from 'element-ui';
+Vue.use(ElementUI);
 import 'element-ui/lib/theme-chalk/index.css';
 
 import '@/assets/css/base.css'
@@ -18,9 +18,9 @@ Vue.prototype.$http = axios
 Vue.config.productionTip = false;
 
 new Vue({
-    el: '#app',
-    router,
-    store,
-    template: '<App/>',
-    components: { App }
+  el: '#app',
+  components: { App },
+  router,
+  store,
+  template: '<App/>'
 })
