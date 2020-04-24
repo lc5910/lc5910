@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// 饼图
 import echarts from "@/assets/js/echarts/echarts.min.js";
 import { debounce } from '@/util/index.js'
 export default {

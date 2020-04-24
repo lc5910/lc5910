@@ -1,14 +1,12 @@
 <template>
   <div class="tools">
     <!-- <top></top> -->
-    <el-row>
-      <el-col :sm="3" class="leftMeau">
-        <leftMeau></leftMeau>
-      </el-col>
-      <el-col :sm="21" class="rightContent">
-        <router-view></router-view>
-      </el-col>
-    </el-row>
+    <div class="leftMeau">
+      <leftMeau></leftMeau>
+    </div>
+    <div class="rightContent">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -41,9 +39,9 @@ export default {
 .tools {
   .rightContent {
     background-color: #fff;
-    min-height: 100%;
     min-height: 700px;
     padding: 0.2rem 0.5rem 0 1rem;
+    margin-left: 120px;
   }
   .el-form {
     .el-form-item {

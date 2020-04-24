@@ -107,7 +107,7 @@ export default {
         this.turns += 1;
         this.angle = 0;
       }
-      this.$refs.prizeName.style.transform = "rotate(" + this.angle + "deg)";
+      this.$refs.prizeName.style.transform = "translate(-50%, -50%) rotate(" + this.angle + "deg)";
       if (
         ~this.prizeIndex &&
         this.turns > 3 &&
@@ -223,18 +223,13 @@ export default {
 </script>
 
 <style  lang="less" scoped>
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
+h1,h2,h3,h4,h5,h6,p {
   margin: 0;
   padding: 0;
 }
 .bg {
   background: url("../assets/images/activity/bg.png") no-repeat;
+  background-color: #dd5727;
   background-size: cover;
   min-height: 667px;
   position: relative;
@@ -245,13 +240,13 @@ p {
   height: 100%;
   .turntable {
     position: absolute;
-    left: 50%;
-    margin-left: -578/80rem;
     width: 578/40rem;
     height: 586/40rem;
     background: url(../assets/images/activity/turntable-bg.png) no-repeat;
     background-size: 100%;
-    top: 390/40rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   .turntable-prizeName {
     width: 490/40rem;
@@ -261,8 +256,8 @@ p {
     background-size: 100%;
     position: absolute;
     left: 50%;
-    top: 436/40rem;
-    margin-left: -490/80rem;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   .start {
     width: 158/40rem;
@@ -271,14 +266,13 @@ p {
     z-index: 8;
     background: url(../assets/images/activity/startBtn1.png) no-repeat;
     background-size: 100% 100%;
-    top: 48%;
     color: #e46923;
     font-size: 36/40rem;
     text-align: center;
     position: absolute;
     left: 50%;
-    margin-left: -158/80rem;
-    top: 575/40rem;
+    top: 50%;
+    transform: translate(-50%, -50%);
     span {
       display: block;
       margin-top: 28/20rem;

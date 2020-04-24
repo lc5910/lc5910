@@ -3,7 +3,7 @@
 </template>
 
 <script>
-// 折线图
+// 堆叠折线图
 import echarts from "@/assets/js/echarts/echarts.min.js";
 import { debounce } from '@/util/index.js'
 export default {
@@ -42,7 +42,11 @@ export default {
   },
   created() {
     this.dataLists = this.dataLists ? this.dataLists : this.datalist;
-    this.dataLists = [{name: "测试1", value: 10 }, {name: "测试2", value: 20 }, {name: "测试3", value: 30 }];
+    this.dataLists = [
+      {name: "测试1", data: [10, 20, 30], x: ["第一", "第二", "第三"], type: 'line', symbol: 'circle', symbolSize: 4, hoverAnimation: false, smooth: false },
+      {name: "测试2", data: [20, 30, 40], x: ["第一", "第二", "第三"], type: 'line', symbol: 'circle', symbolSize: 4, hoverAnimation: false, smooth: false },
+      {name: "测试3", data: [40, 10, 50], x: ["第一", "第二", "第三"], type: 'line', symbol: 'circle', symbolSize: 4, hoverAnimation: false, smooth: false }
+    ];
   },
   mounted() {
     this.initChart();
@@ -66,8 +70,7 @@ export default {
       this.chart = echarts.init(this.$el);
       const option = {
         tooltip: {
-          trigger: "axis",
-          // formatter: "{b} : {c}",
+          trigger: 'axis',
           axisPointer: {
             type: 'line',
             lineStyle: {
@@ -77,15 +80,22 @@ export default {
             }
           }
         },
+        legend: {
+          left: "center",
+          icon: "circle",
+          data: this.dataLists.map(item => {
+            return item.name;
+          })
+        },
+        color: ["#1890ff", "#2fc25b", "#FF9900"],
         grid: {
           left: '5%',
           right: '5%',
         },
         xAxis: {
           type: 'category',
-          data: this.dataLists.map(item => {
-            return item.name;
-          }),
+          boundaryGap: false,
+          data: this.dataLists[0] && this.dataLists[0].x || [],
           axisLabel: { textStyle: {color: "#999"}},
           axisLine: {
             lineStyle: {
@@ -97,6 +107,13 @@ export default {
         },
         yAxis: {
           type: 'value',
+          splitArea: {show: false}, // 网格区域
+          splitLine: {
+            lineStyle: {
+              color: '#eee',
+              type: 'dashed'
+            }
+          }, // 网格线
           axisLabel: { textStyle: {color: "#999"}},
           axisLine: {
             lineStyle: {
@@ -105,31 +122,10 @@ export default {
               width: '1'
             }
           },
-          splitArea: {show: false}, // 网格区域
-          splitLine: {
-            lineStyle: {
-              color: '#eee',
-              type: 'dashed'
-            }
-          }, // 网格线
         },
-        series: [{
-          data: this.dataLists.map(item => {
-            return item.value;
-          }),
-          type: 'line',
-          symbol: 'circle',
-          symbolSize: 8,
-          hoverAnimation: false,
-          smooth: false, // 是否平滑曲线显示
-          itemStyle: {
-            normal: {
-              color: "rgba(24, 144, 255)",
-              lineStyle: {color: 'rgba(24, 144, 255)'},
-            }
-          },
-        }]
+        series: this.dataLists
       };
+
       this.chart.setOption(option);
     }
   }

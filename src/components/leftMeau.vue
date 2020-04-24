@@ -8,12 +8,12 @@
       <el-submenu index="2">
         <template slot="title">图表</template>
         <el-menu-item index="/tools/ECharts">ECharts</el-menu-item>
-        <el-menu-item index="/drawLottery">抽个奖</el-menu-item>
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">学习</template>
         <el-menu-item index="/test/ES6">ES6</el-menu-item>
         <el-menu-item index="/test/CSS3">CSS3</el-menu-item>
+        <el-menu-item index="/drawLottery">移动端抽奖</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
@@ -39,8 +39,7 @@ export default {
   },
   methods: {
     init: function() {
-      this.account =
-        window.location.hash.replace(/#(\/[\w]+\/[\w]+).*/, "$1") || "/";
+      this.account = window.location.hash.replace(/#(\/[\w]+\/[\w]+).*/, "$1") || "/";
       // console.log(this.account);
     }
   }
@@ -50,22 +49,20 @@ export default {
 <style lang="less">
 .leftMeau {
   background-color: #3d414f;
-  margin-bottom: -2000px;
-  padding-bottom: 2000px;
+  position: fixed;
+  height: 100%;
   ul.el-menu {
     background-color: #324157;
     border: none;
     .el-menu-item {
       color: #fff;
-      &:focus,
-      &:hover {
+      &:focus, &:hover {
         background-color: #1f2d3d;
       }
     }
     .el-submenu__title {
       color: #fff;
-      &:focus,
-      &:hover {
+      &:focus, &:hover {
         background-color: #324157;
       }
     }
@@ -82,5 +79,8 @@ export default {
       min-width: unset;
     }
   }
+}
+.rightContent{
+  margin-left: 160px;
 }
 </style>

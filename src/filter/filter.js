@@ -1,11 +1,22 @@
-// Created by gage on 2017/8/1.
-import Vue from 'vue';
-
-Vue.filter('toFixed2', (val) => {
-  let value = (parseInt(val * 100) / 100).toString();
-  value.indexOf('.') < 0 ? value += '.' : 0;
-  while (value.length <= value.indexOf('.') + 2) {
-    value += '0';
+// 四舍五入-保留两位小数-千分位表示
+export function formatMoneyFilter(value) {
+  if (value === undefined || value === null || value === "") {
+    return "";
   }
-  return value;
-});
+  var parts;
+  if (~value.toString().indexOf(".")) {
+    parts = Number(value).toFixed(2).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,').split('.');
+    parts = parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '.' + parts[1];
+  } else {
+    parts = Math.round(value).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  }
+  return parts;
+}
+
+// 四舍五入-取整-千分位表示
+export function formatRoundInt(value) {
+  if (value === undefined || value === null || value === "") {
+    return "";
+  }
+  return Math.round(value).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+}

@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// 折线图
 import echarts from "@/assets/js/echarts/echarts.min.js";
 import { debounce } from '@/util/index.js'
 export default {
@@ -87,7 +88,13 @@ export default {
         },
         yAxis: {
           type: "value",
-          splitLine: { show: false }
+          splitArea: {show: false}, // 网格区域
+          splitLine: {
+            lineStyle: {
+              color: '#eee',
+              type: 'dashed'
+            }
+          }, // 网格线
         },
         series: [
           {
@@ -114,7 +121,7 @@ export default {
               data: [
                 [
                   { coord: ["0.2-0.3", 0] },
-                  { coord: ["0.2-0.3", 0.22], value: "指数:0.22" }
+                  { coord: ["0.2-0.3", 0.22], value: "数值:0.22" }
                 ]
               ]
             }
