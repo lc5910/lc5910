@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.12
+ * gage_tools.js v0.2.13
  * (c) gage(591033791@qq.com)
- * Update 2017/7/22 - 2020/1/6
+ * Update 2017-07-22 ~ 2020-04-24
  * Tools Library Of Native JavaScript
  */
 (function (global, factory) {
@@ -134,42 +134,6 @@
     return obj;
   }
 
-  /* 校验表单 */
-  gage.checkForm = function (sel) {
-    var sel = document.querySelector(sel);
-    var children = sel.querySelectorAll('input');
-    for (var i = 0; i < children.length; i++) {
-      var val = children[i];
-      var type = val.getAttribute('type');
-      if (val.getAttribute('required') != 'false') {
-        if (type == 'text' || type == 'password') {
-          if (val.value == '' || val.length == 0) {
-            return [false, children[i]];
-          }
-        }
-      }
-    }
-    return true;
-  }
-
-  /* 获取表单 */
-  gage.getForm = function (sel, attribute) {
-    var sel = document.querySelector(sel);
-    var res = {};
-    var children = sel.querySelectorAll('input');
-    children.forEach(function (val) {
-      var type = val.getAttribute('type');
-      if (((type == 'radio' || type == 'checkbox') && val.checked) || type == 'text' || type == 'password') {
-        if (val.getAttribute(attribute || 'data-val')) {
-          res[val.getAttribute('name')] = val.getAttribute('data-val');
-        } else {
-          res[val.getAttribute('name')] = val.value;
-        }
-      }
-    });
-    return res;
-  }
-
   /* 获取设备类型 */
   gage.deviceType = function () {
     var obj = {};
@@ -188,16 +152,14 @@
 
   /* 获取浏览器类型和版本 */
   gage.getExplore = function () {
-    var sys = {},
-      ua = navigator.userAgent.toLowerCase(),
-      s;
+    var sys = {}, ua = navigator.userAgent.toLowerCase(), s;
     (s = ua.match(/rv:([\d.]+)\) like gecko/)) ? sys.ie = s[1] :
-      (s = ua.match(/msie ([\d\.]+)/)) ? sys.ie = s[1] :
-        (s = ua.match(/edge\/([\d\.]+)/)) ? sys.edge = s[1] :
-          (s = ua.match(/firefox\/([\d\.]+)/)) ? sys.firefox = s[1] :
-            (s = ua.match(/(?:opera|opr).([\d\.]+)/)) ? sys.opera = s[1] :
-              (s = ua.match(/chrome\/([\d\.]+)/)) ? sys.chrome = s[1] :
-                (s = ua.match(/version\/([\d\.]+).*safari/)) ? sys.safari = s[1] : 0;
+    (s = ua.match(/msie ([\d\.]+)/)) ? sys.ie = s[1] :
+    (s = ua.match(/edge\/([\d\.]+)/)) ? sys.edge = s[1] :
+    (s = ua.match(/firefox\/([\d\.]+)/)) ? sys.firefox = s[1] :
+    (s = ua.match(/(?:opera|opr).([\d\.]+)/)) ? sys.opera = s[1] :
+    (s = ua.match(/chrome\/([\d\.]+)/)) ? sys.chrome = s[1] :
+    (s = ua.match(/version\/([\d\.]+).*safari/)) ? sys.safari = s[1] : 0;
     if (sys.ie) return ('ie:' + sys.ie)
     if (sys.edge) return ('edge:' + sys.edge)
     if (sys.firefox) return ('firefox:' + sys.firefox)
@@ -214,7 +176,7 @@
     maxSize = maxSize ? maxSize : 200;
     if (!file || !window.FileReader) { return; }
     var Orientation = null;
-    //若处理IOS的BUG需提前引入exif.js
+    // 若处理IOS上传方向不正确的BUG需提前引入exif.js
     window.EXIF && EXIF.getData(file, function () {
       Orientation = EXIF.getTag(this, 'Orientation');
     });
@@ -414,21 +376,6 @@
     return parseInt(Math.random() * (n - m + 1) + m);
   }
 
-  /* 保留2位小数(向下取值) */
-  gage.toFixed2 = function (val) {
-    if (val === '' || isNaN(val)) { return ''; }
-    var value = (parseInt(val * 100) / 100).toString();
-    if (~val.toString().indexOf('.99999999999')) {
-      value -= -0.01;
-      value += '';
-    }
-    if (value.indexOf('.') < 0) { return value; }
-    while (value.length <= value.indexOf('.') + 2) {
-      value += '0';
-    }
-    return value;
-  }
-
   /* Android端body宽高改变的回调 */
   gage.windowResize = function (upCb, downCb) {
     if (!/(Android)/i.test(navigator.userAgent)) { return };
@@ -460,6 +407,87 @@
         setTimeout(function () { document.activeElement.scrollIntoViewIfNeeded(); }, 0);
       })
     }
+  }
+
+  /* 保留2位小数(向下取值) */
+  gage.toFixed2 = function (val) {
+    if (val === '' || isNaN(val)) { return ''; }
+    var value = (parseInt(val * 100) / 100).toString();
+    if (~val.toString().indexOf('.999')) {
+      value -= -0.01;
+      value += '';
+    }
+    if (value.indexOf('.') < 0) { return value; }
+    while (value.length <= value.indexOf('.') + 2) {
+      value += '0';
+    }
+    return value;
+  }
+
+  /* 四舍五入-保留两位小数-千分位表示 */
+  gage.formatRoundFloat = function (value) {
+    if (value === undefined || value === null || value === "") {
+      return "";
+    }
+    var parts;
+    if (~value.toString().indexOf(".")) {
+      parts = Number(value).toFixed(2).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,').split('.');
+      parts = parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '.' + parts[1];
+    } else {
+      parts = Math.round(value).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+    return parts;
+  }
+
+  /* 四舍五入-取整-千分位表示 */
+  gage.formatRoundInt = function (value) {
+    if (value === undefined || value === null || value === "") {
+      return "";
+    }
+    var parts;
+    if (~value.toString().indexOf(".")) {
+      parts = Number(value).toFixed(2).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,').split('.');
+      parts = parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '.' + parts[1];
+    } else {
+      parts = Math.round(value).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+    return parts;
+  }
+
+  /* 校验表单 */
+  gage.checkForm = function (sel) {
+    var sel = document.querySelector(sel);
+    var children = sel.querySelectorAll('input');
+    for (var i = 0; i < children.length; i++) {
+      var val = children[i];
+      var type = val.getAttribute('type');
+      if (val.getAttribute('required') != 'false') {
+        if (type == 'text' || type == 'password') {
+          if (val.value == '' || val.length == 0) {
+            return [false, children[i]];
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+  /* 获取表单 */
+  gage.getForm = function (sel, attribute) {
+    var sel = document.querySelector(sel);
+    var res = {};
+    var children = sel.querySelectorAll('input');
+    children.forEach(function (val) {
+      var type = val.getAttribute('type');
+      if (((type == 'radio' || type == 'checkbox') && val.checked) || type == 'text' || type == 'password') {
+        if (val.getAttribute(attribute || 'data-val')) {
+          res[val.getAttribute('name')] = val.getAttribute('data-val');
+        } else {
+          res[val.getAttribute('name')] = val.value;
+        }
+      }
+    });
+    return res;
   }
 
   /* base64加密解密 */
@@ -546,18 +574,6 @@
       }
       return t;
     }
-  }
-
-  /* 数字千分位表示法 */
-  gage.thousands = function (val) {
-    if (!val) { return val; }
-    val = val.toString();
-    if (~val.indexOf('.')) {
-      val = val.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-    } else {
-      val = val.replace(/(?=(?!(\b))(\d{3})+$)/g, ",");
-    }
-    return val;
   }
 
   return gage;

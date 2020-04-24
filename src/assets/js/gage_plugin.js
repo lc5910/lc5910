@@ -1,7 +1,7 @@
 /*
  * gage_plugin.js v0.0.13
  * (c) gage(591033791@qq.com)
- * Update 2017/12/26 - 2018/11/28
+ * Update 2017-12-26 ~ 2018-11-28
  * Tools Library Of jQuery Plugin
  */
 (function (global, factory) {

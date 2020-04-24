@@ -80,7 +80,4 @@ export default {
     }
   }
 }
-.rightContent{
-  margin-left: 160px;
-}
 </style>

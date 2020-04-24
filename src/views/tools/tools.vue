@@ -40,8 +40,8 @@ export default {
   .rightContent {
     background-color: #fff;
     min-height: 700px;
-    padding: 0.2rem 0.5rem 0 1rem;
-    margin-left: 120px;
+    padding: 10px 10px 0 30px;
+    margin-left: 145px;
   }
   .el-form {
     .el-form-item {
