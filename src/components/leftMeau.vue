@@ -11,7 +11,6 @@
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">学习</template>
-        <el-menu-item index="/test/ES6">ES6</el-menu-item>
         <el-menu-item index="/test/CSS3">CSS3</el-menu-item>
         <el-menu-item index="/drawLottery">移动端抽奖</el-menu-item>
       </el-submenu>
