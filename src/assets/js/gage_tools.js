@@ -1,7 +1,7 @@
 /*
- * gage_tools.js v0.2.14
+ * gage_tools.js v0.2.15
  * (c) gage(591033791@qq.com)
- * Update 2017-07-22 ~ 2020-06-09
+ * Update 2017-07-22 ~ 2020-07-23
  * Tools Library Of Native JavaScript
  */
 (function (global, factory) {
@@ -396,6 +396,9 @@
       parts = parts[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + '.' + parts[1];
     } else {
       parts = Math.round(value).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    }
+    if (parts.indexOf(".00")) {
+      parts = parts.replace(/(.+)\.00$/, '$1');
     }
     return parts;
   }

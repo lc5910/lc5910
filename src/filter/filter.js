@@ -12,6 +12,9 @@ export function formatRoundFloat(value) {
   } else {
     parts = Math.round(value).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
   }
+  if (parts.indexOf(".00")) {
+    parts = parts.replace(/(.+)\.00$/, '$1');
+  }
   return parts;
 }
 
